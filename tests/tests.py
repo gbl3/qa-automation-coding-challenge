@@ -8,8 +8,14 @@ from pages.GetGitReposPage import GetGitReposPage
 
 class GetGitReposPageTests(unittest.TestCase):
     def setUp(self) -> None:
+        options = webdriver.ChromeOptions()
+        # If you want to run it headless, just uncomment the line below:
+        # options.add_argument("--headless=new")
+
         # Using webdriver_manager library to programmatically download and get chrome driver path
-        self.driver: webdriver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        self.driver: webdriver = webdriver.Chrome(
+            service=ChromeService(ChromeDriverManager().install()), options=options
+        )
         self.page: GetGitReposPage = GetGitReposPage(self.driver)
         self.page.visit()
 
