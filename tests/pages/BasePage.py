@@ -1,4 +1,6 @@
 from selenium.webdriver.remote import webdriver, webelement
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage(object):
@@ -25,7 +27,7 @@ class BasePage(object):
         elements = self.driver.find_elements(*selector)
         return len(elements)
 
-    def fill_in(self, text, selector: tuple) -> None:
+    def fill_in(self, selector: tuple, text: str) -> None:
         element = self.driver.find_element(*selector)
         element.send_keys(text)
 
@@ -36,3 +38,9 @@ class BasePage(object):
     def get_elements(self, selector: tuple) -> list[webelement]:
         elements = self.driver.find_elements(*selector)
         return elements
+
+    def wait_for_element(self, selector: tuple, timeout: int = 5) -> None:
+        wait = WebDriverWait(self.driver, timeout)
+        wait.until(
+            EC.presence_of_element_located(selector)
+        )

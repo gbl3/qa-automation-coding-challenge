@@ -38,14 +38,10 @@ class GetGitReposPageLocators:
     def repo_list_items(self) -> tuple:
         return (By.CSS_SELECTOR, f"{self.OUTPUT_AREA_LOCATOR} li.repo-row")
 
-    def get_repo_item_locators(self, item_number) -> dict:
-        repo_name_locator: tuple = (By.CSS_SELECTOR, f"{self.OUTPUT_AREA_LOCATOR} li.repo-row:nth-child({item_number}) a")
-        repo_description_locator: tuple = (
-            By.CSS_SELECTOR,
-            f"{self.OUTPUT_AREA_LOCATOR} li.repo-row:nth-child({item_number}) .repo-description"
-        )
+    @property
+    def repo_description(self) -> tuple:
+        return (By.CSS_SELECTOR, '.repo-description')
 
-        return {
-            "repo_name": repo_name_locator,
-            "repo_description": repo_description_locator
-        }
+    def repo_link(self, repo_name: str) -> tuple:
+        return (By.PARTIAL_LINK_TEXT, repo_name)
+
