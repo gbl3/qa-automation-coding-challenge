@@ -42,6 +42,7 @@ class GetGitReposPageLocators:
     def repo_description(self) -> tuple:
         return (By.CSS_SELECTOR, '.repo-description')
 
-    def repo_link(self, repo_name: str) -> tuple:
+    @staticmethod
+    def repo_link(repo_name: str) -> tuple:
         return (By.PARTIAL_LINK_TEXT, repo_name)
 
