@@ -9,8 +9,8 @@ from pages.GetGitReposPage import GetGitReposPage
 
 class GetGitReposPageTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-        self.page = GetGitReposPage(self.driver)
+        self.driver: webdriver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        self.page: GetGitReposPage = GetGitReposPage(self.driver)
         self.page.visit()
 
     def test_verify_initial_state(self):
@@ -26,10 +26,10 @@ class GetGitReposPageTests(unittest.TestCase):
         :return: None
         """
 
-        expected_no_repos_text = "No repos"
-        actual_page_title_text = self.page.get_page_title()
-        actual_page_header_text = self.page.get_header().text
-        actual_no_repos_text = self.page.get_no_repos().text
+        expected_no_repos_text: str = "No repos"
+        actual_page_title_text: str = self.page.get_page_title()
+        actual_page_header_text: str = self.page.get_header().text
+        actual_no_repos_text: str = self.page.get_no_repos().text
 
         self.assertTrue(
             self.page.get_header_visibility(),
